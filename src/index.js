@@ -20,6 +20,33 @@ app.get('/produto', async (req, resp) => {
 app.post('/produto', async (req, resp) => {
     try{
         let { nome, categoria, avaliacao, precode, precopor, estoque, linkimagem, descricao} = req.body;
+        let u = req.body;
+
+        if(!/./.test(u.nome))
+            return resp.send({erro: 'Todos os campos devem ser preenchidos'})
+    
+        if(!/./.test(u.categoria))
+            return resp.send({erro: 'Todos os campos devem ser preenchidos'})
+    
+        if(!/./.test(u.avaliacao))
+            return resp.send({erro: 'Todos os campos devem ser preenchidos'})
+    
+        if(!/./.test(u.precode))
+            return resp.send({erro: 'Todos os campos devem ser preenchidos'})
+        
+        if(!/./.test(u.precopor))
+            return resp.send({erro: 'Todos os campos devem ser preenchidos'})
+    
+        if(!/./.test(u.estoque))
+            return resp.send({erro: 'Todos os campos devem ser preenchidos'})
+    
+        if(!/./.test(u.linkimagem))
+            return resp.send({erro: 'Todos os campos devem ser preenchidos'})
+    
+        if(!/./.test(u.descricao))
+            return resp.send({erro: 'Todos os campos devem ser preenchidos'})
+
+        
 
         let a = new Date();
         
