@@ -46,7 +46,11 @@ app.post('/produto', async (req, resp) => {
         if(!/./.test(u.descricao))
             return resp.send({erro: 'Todos os campos devem ser preenchidos'})
 
-        
+        let x = await db.tb_produto.findOne( { where: { nm_produto: u.nome }})
+
+        if(x =! null)
+            return resp.send({erro: 'Produto já existe'})        
+
 
         let a = new Date();
         
@@ -71,6 +75,11 @@ app.post('/produto', async (req, resp) => {
 app.put('/produto/:id', async (req, resp) => {
     try{
         let { nome, categoria, avaliacao, precode, precopor, estoque, linkimagem, descricao} = req.body;
+
+
+
+
+
 
         let { id } = req.params;
 
