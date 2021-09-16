@@ -21,6 +21,9 @@ app.post('/produto', async (req, resp) => {
     try{
         let { nome, categoria, avaliacao, precode, precopor, estoque, linkimagem, descricao} = req.body;
         let u = req.body;
+        console.log(u)
+
+        // validações campos obrigatórios
 
         if(!/./.test(u.nome))
             return resp.send({erro: 'Todos os campos devem ser preenchidos'})
@@ -46,11 +49,27 @@ app.post('/produto', async (req, resp) => {
         if(!/./.test(u.descricao))
             return resp.send({erro: 'Todos os campos devem ser preenchidos'})
 
+        // validação produto repetido
+        
+        
         let x = await db.tb_produto.findOne( { where: { nm_produto: u.nome }})
 
-        if(x =! null)
-            return resp.send({erro: 'Produto já existe'})        
+        if(x != null)
+            return resp.send({erro: 'Produto já existe'})    
+            
+        // validação avaliacao, estoque e precos serem numeros
 
+        if (isNaN(u.avaliacao) === true)
+            return resp.send({erro: 'Avaliação deve ser um número'})
+        
+        if (isNaN(u.precode) === true || isNaN(u.precopor) === true)
+            return resp.send({erro: 'Peços devem ser números'})  
+            
+        if (isNaN(u.estoque) === true)
+            return resp.send({erro: "Estoque deve ser um número"})
+
+
+    
 
         let a = new Date();
         
